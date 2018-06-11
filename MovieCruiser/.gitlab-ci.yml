@@ -1,23 +1,25 @@
-image: microsofsoft/aspnetcore-build:latest
+image : microsoft/aspnetcore-build:latest
 stages:
-- compile
-- test
-- build
+  - compile
+  - test
+  - build
 compile:
   stage: compile
   script:
-- 'dotnet restore'
-- 'dotnet build'
+    - 'dotnet restore'
+    - 'dotnet build'
 test:
-- 'dotnet test MovieAPIUnitTest/MovieAPIUnitTest.csproj
+  stage: test
+  script:
+    - 'dotnet test MovieAPIUnitTest/MovieAPIUnitTest.csproj'
 build:
-stage: build
-script:
-- 'dotnet publish MovieCruiser -c Release'
-artifacts:
-expire_in: 1 month
-path:
-- moviecruiser/bin/Release/netcoreapp2.0/publish/
+  stage: build
+  script:
+    - 'dotnet publish moviecruiser -c Release'
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - moviecruiser/bin/Release/netcoreapp2.0/publish/
 
 
 
