@@ -1,0 +1,17 @@
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\obj\Debug\netcoreapp2.0\MovieAPIUnitTest.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\obj\Debug\netcoreapp2.0\MovieAPIUnitTest.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\obj\Debug\netcoreapp2.0\MovieAPIUnitTest.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\obj\Debug\netcoreapp2.0\MovieAPIUnitTest.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\xunit.runner.utility.netcoreapp10.dll
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\MovieAPIUnitTest.deps.json
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\MovieAPIUnitTest.runtimeconfig.json
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\MovieAPIUnitTest.runtimeconfig.dev.json
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\MovieAPIUnitTest.dll
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\MovieAPI.dll
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\MovieAPI.pdb
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\obj\Debug\netcoreapp2.0\MovieAPIUnitTest.csproj.CopyComplete
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\bin\Debug\netcoreapp2.0\MovieAPIUnitTest.pdb
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\obj\Debug\netcoreapp2.0\MovieAPIUnitTest.dll
+C:\Users\Administrator\source\repos\MovieCruiser\MovieAPIUnitTest\obj\Debug\netcoreapp2.0\MovieAPIUnitTest.pdb

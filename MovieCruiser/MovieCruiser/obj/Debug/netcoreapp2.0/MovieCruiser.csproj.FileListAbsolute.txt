@@ -1,0 +1,11 @@
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\bin\Debug\netcoreapp2.0\MovieCruiser.deps.json
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\bin\Debug\netcoreapp2.0\MovieCruiser.runtimeconfig.json
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\bin\Debug\netcoreapp2.0\MovieCruiser.runtimeconfig.dev.json
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\bin\Debug\netcoreapp2.0\MovieCruiser.dll
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\bin\Debug\netcoreapp2.0\MovieCruiser.pdb
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\obj\Debug\netcoreapp2.0\MovieCruiser.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\obj\Debug\netcoreapp2.0\MovieCruiser.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\obj\Debug\netcoreapp2.0\MovieCruiser.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\obj\Debug\netcoreapp2.0\MovieCruiser.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\obj\Debug\netcoreapp2.0\MovieCruiser.dll
+C:\Users\Administrator\source\repos\MovieCruiser\MovieCruiser\obj\Debug\netcoreapp2.0\MovieCruiser.pdb
