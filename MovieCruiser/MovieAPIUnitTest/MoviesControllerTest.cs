@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using MovieAPI.Controllers;
+using MovieAPI.Entity;
 using MovieAPI.Model;
+using MovieAPI.Service;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,73 +14,159 @@ namespace MovieAPIUnitTestvieAPITest
     
     public class MoviesControllerTest
     {
+        
         [Fact]
         public void GetMoviesListTMDBTest()
         {
-            var mockIMovies = new Mock<IMovie>();
+           
+            var mockIMovies = new Mock<IWatchListService>();
 
-            mockIMovies.Setup(service => service.GetTMDBMovieslList);
+            mockIMovies.Setup(service => service.GetTMDBMovieslList).Returns(GetMoviesListFromTMDB());
 
             var movieController = new MoviesController(mockIMovies.Object);
 
-            Assert.NotNull(movieController.Get());
-          
+            var result = movieController.GetTMDB().Result as List<MovieList>;
+
+            //Assert
+            Assert.Equal(2, result.Count);
+
+
         }
 
         [Fact]
         public void GetMovieByIdTest()
         {
-            var mockIMovies = new Mock<IMovie>();
-            mockIMovies.Setup(service => service.GetMovieslList()).Returns(GetMoviesListAsync());
+            var mockIMovies = new Mock<IWatchListService>();
+            mockIMovies.Setup(service => service.GetAll()).Returns(GetMoviesList());
             var movieController = new MoviesController(mockIMovies.Object);
-            var result = Assert.IsType<OkObjectResult>(movieController.Get(1).Result);
+          
+            // Act
+            var result = movieController.Get();
+            var actualResult = result as List<WatchListDetails>;
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(2, actualResult.Count);
+        }
+
+        [Fact]
+        public void GetMoviesForInvalidId()
+        {
+            var mockIMovies = new Mock<IWatchListService>();
+            mockIMovies.Setup(service => service.GetAll()).Returns(GetMoviesList());
+            // Arrange 
+            var controller = new MoviesController(mockIMovies.Object);
+
+            // Act
+            var result = controller.Get(458955) as NotFoundResult;
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(404, result.StatusCode);
         }
 
 
         [Fact]
         public void InsertMovieTest()
         {
-            var mockIMovies = new Mock<IMovie>();
-            mockIMovies.Setup(service => service.GetMovieslList()).Returns(GetMoviesListAsync());
+            var mockIMovies = new Mock<IWatchListService>();
+            mockIMovies.Setup(service => service.GetAll()).Returns(GetMoviesList());
             var movieController = new MoviesController(mockIMovies.Object);
-            var movieobj = new Movie { id = 3, Title = "IrumbuThirai", Release_date = "07/06/2018", Vote_count = 100, Vote_average = 9.80, overview = "Good" };
-            var result = Assert.IsType<OkObjectResult>(movieController.Post(3, movieobj).Result);
-            
+            var movieobj = new WatchListDetails { Id = 3, MovieName = "IrumbuThirai", ReleaseDate = "07/06/2018", VoteCount = 100, VoteAverage = 9.80, Overview = "Good" };
+
+            // Act
+            var result = movieController.Post(movieobj) as StatusCodeResult;
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(201, result.StatusCode);
         }
 
 
         [Fact]
         public void UpdateMovieTest()
         {
-            var mockIMovies = new Mock<IMovie>();
-            mockIMovies.Setup(service => service.GetMovieslList()).Returns(GetMoviesListAsync());
+            var expected = 1;
+            var mockIMovies = new Mock<IWatchListService>();
+            mockIMovies.Setup(x => x.update(It.IsAny<WatchListDetails>())).Returns(1);           
             var movieController = new MoviesController(mockIMovies.Object);
-            var movieobj = new Movie { id = 2,Comments="Good Movie" };
-            var okResult = Assert.IsType<OkResult>(movieController.Put(2, movieobj).Result);
-
-            movieobj = new Movie { id = 3, Comments = "Good Movie" };
-            var result = Assert.IsType<NotFoundObjectResult> (movieController.Put(3, movieobj).Result);
+            var movieobj = new WatchListDetails { Id =2,Comments="Good Movie" };
            
+            // Act
+            var result = movieController.Put(2, movieobj) as OkObjectResult;
+            var actualResult = result.Value;
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(200, result.StatusCode);
+            Assert.Equal(expected, actualResult);
+
+                    
+        }
+
+        [Fact]
+        public void UpdateMovieForInValidId()
+        {
+            
+            var mockIMovies = new Mock<IWatchListService>();
+            mockIMovies.Setup(x => x.update(It.IsAny<WatchListDetails>())).Returns(1);
+            var movieController = new MoviesController(mockIMovies.Object);
+            var  movieobj = new WatchListDetails { Id = 3, Comments = "Good Movie" };
+
+            // Act
+            var result = movieController.Put(4, movieobj) as BadRequestResult;
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(400, result.StatusCode);
         }
 
 
         [Fact]
         public void DeleteMovieTest()
         {
-            var mockIMovies = new Mock<IMovie>();
-            mockIMovies.Setup(service => service.GetMovieslList()).Returns(GetMoviesListAsync());
+            var mockIMovies = new Mock<IWatchListService>();
+            mockIMovies.Setup(x => x.Delete(It.IsAny<int>())).Returns(true);
             var movieController = new MoviesController(mockIMovies.Object);            
-            var OkResult = Assert.IsType<OkResult>(movieController.Delete(2).Result);
+           
+            // Act
+            var result = movieController.Delete(2) as OkObjectResult;
+            var actualResult = (bool)result.Value;
 
-            var result = Assert.IsType<NotFoundObjectResult>(movieController.Delete(4).Result);
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(200, result.StatusCode);
+            Assert.True(actualResult);
         }
-            
 
-        private async Task<List<Movie>> GetMoviesListAsync()
+
+        [Fact]
+        public void DeleteForInVaildId()
         {
-          return new  List<Movie> {
-                new Movie { id=1,Title="Kaala",Release_date="07/06/2018",Vote_count=100,Vote_average=9.80,overview="Good" },
-                new Movie { id=2,Title="Jurasic Word",Release_date="07/06/2018",Vote_count=80,Vote_average=5.50,overview="Good" }
+            var mockIMovies = new Mock<IWatchListService>();
+            mockIMovies.Setup(x => x.Delete(It.IsAny<int>())).Returns(false);
+            var movieController = new MoviesController(mockIMovies.Object);
+            // Act
+            var result = movieController.Delete(4) as NotFoundObjectResult;
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(404, result.StatusCode);
+
+        }
+
+        private  IList<WatchListDetails> GetMoviesList()
+        {
+          return new  List<WatchListDetails> {
+                new WatchListDetails { Id=1,MovieName="Kaala",ReleaseDate="07/06/2018",VoteCount=100,VoteAverage=9.80,Overview="Good" },
+                new WatchListDetails { Id=2,MovieName="Jurasic Word",ReleaseDate="07/06/2018",VoteCount=80,VoteAverage=5.50,Overview="Good" }
+            };
+        }
+
+        private IList<MovieList> GetMoviesListFromTMDB()
+        {
+            return new List<MovieList> {
+                new MovieList { Id=1,Title="Kaala",Release_date="07/06/2018",Vote_count=100,Vote_average=9.80,overview="Good" },
+                new MovieList { Id=2,Title="Jurasic Word",Release_date="07/06/2018",Vote_count=80,Vote_average=5.50,overview="Good" }
             };
         }
 

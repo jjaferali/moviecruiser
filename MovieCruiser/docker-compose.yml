@@ -1,0 +1,26 @@
+version: '3'
+services:
+    authorization:
+        image: "authorization"
+        ports:
+            - "8081:80"
+        links:
+            - db
+        environment:
+            SQLSERVER: "Data source=db;initial catalog=User;User id=sa;Password=P@ssw0rd"
+    backend:
+        image: "moviecruiser"
+        ports:
+            - "8089:80"
+        links:
+            - db
+            - authorization
+        environment:
+            SQLSERVER: "Data source=db;initial catalog=Movie;User id=sa;Password=P@ssw0rd"
+    db:
+        image: "microsoft/mssql-server-windows-express"
+        ports:
+            - "1433:1433"
+        environment:
+            SA_PASSWORD: "P@ssw0rd"
+            ACCEPT_EULA: "Y"

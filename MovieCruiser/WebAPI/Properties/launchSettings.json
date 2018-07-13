@@ -13,14 +13,22 @@
       "launchBrowser": true,
       "launchUrl": "api/Movies",
       "environmentVariables": {
+        "SQL_AUTH": "Initial Catalog=fsddb;Data Source=fsdpracserver.database.windows.net;user id=jaffer;password=password@123",
+        "BaseUrl": "http://api.themoviedb.org/3/",
+        "ApiKey": "api_key=84e747d123fcfd4d8bbd2792dc5bd306",
+        "NowPlaying": "movie/now_playing?",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WebApplication1": {
+    "MovieCruiser": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/Movies",
       "environmentVariables": {
+        "SQL_AUTH": "Initial Catalog=fsddb;Data Source=fsdpracserver.database.windows.net;user id=jaffer;password=password@123",
+        "BaseUrl": "http://api.themoviedb.org/3/",
+        "ApiKey": "api_key=84e747d123fcfd4d8bbd2792dc5bd306",
+        "NowPlaying": "movie/now_playing?",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:49856/"

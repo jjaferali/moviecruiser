@@ -1,95 +1,141 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using MovieAPI.Model;
-using Newtonsoft.Json;
-
-namespace MovieAPI.Controllers
+﻿namespace MovieAPI.Controllers
 {
-    [Route("api/[controller]")]
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using MovieAPI.Entity;
+    using MovieAPI.Model;
+    using MovieAPI.Repository;
+    using MovieAPI.Service;
+    using Newtonsoft.Json;
+
+    [Route("api/Movies")]
+    [Authorize]
     public class MoviesController : Controller
-
     {
-        private IMovie obj;     
+        private IWatchListService service;
 
-        public MoviesController(IMovie _obj)
+        /// <summary>
+        /// Initialize IWatchListService service
+        /// </summary>
+        /// <param name="service"></param>
+        public MoviesController(IWatchListService service)
         {
-            this.obj = _obj;
+            this.service = service;
         }
-     
+
+
         // GET api/values
         [HttpGet]
-        public async Task<IEnumerable<Movie>> Get()
-        {
-
-            var baseAddress = new Uri(MovieRepository.BaseUrl);           
-            using (var httpClient = new HttpClient { BaseAddress = baseAddress })
-            {
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("accept", "application/json");
-
-                using (var response = await httpClient.GetAsync(MovieRepository.NowPlaying + MovieRepository.ApiKey + "&page=1"))
-                {
-                    string responseData = await response.Content.ReadAsStringAsync();
-                     obj = JsonConvert.DeserializeObject<MovieDataProvider>(responseData);
-                    
-                }
-            }
-            return obj.GetTMDBMovieslList; 
+        [Route("TMDB")]
+        public async Task<IEnumerable<MovieList>> GetTMDB()
+        {           
+            return service.GetTMDBMovieslList;
         }
 
-        //GET api/values/5
+        /// <summary>
+        /// Get all Watch list
+        /// </summary>
+        /// <returns>list of WatchListDetails</returns>
+        // GET: api/WatchList
+        [HttpGet]
+        public IEnumerable<WatchListDetails> Get()
+        {
+            return this.service.GetAll();
+        }
+
+        /// <summary>
+        /// Get Watchlist by id
+        /// </summary>
+        /// <param name="id">whish list id</param>
+        /// <returns>WatchListDetails</returns>
+        // GET: api/WatchList/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public IActionResult Get([FromRoute] int id)
         {
-            if ((await obj.GetMovieslList()).All(a => a.id != id))
+            var WatchListDetails = this.service.GetWhisListById(id);
+
+            if (WatchListDetails == null)
             {
-                return NotFound(id);
+                return NotFound();
             }
-            return Ok((await obj.GetMovieslList()).Where(a => a.id == id).FirstOrDefault());
+
+            return Ok(WatchListDetails);
         }
 
-        // POST api/values
-        [HttpPost]
-        public async Task<IActionResult> Post(int id, Movie movie)
-        {
-            if (!ModelState.IsValid)
-             return BadRequest(ModelState);             
-            await obj.InsertMovies(id, movie);
-            return Ok(movie);
-
-        }
-
-        // PUT api/values/5
+        /// <summary>
+        /// add Watchlist
+        /// </summary>
+        /// <param name="id">Watchlist id</param>
+        /// <param name="WatchListDetails">WatchListDetails</param>
+        /// <returns>WatchListDetails</returns>
+        // PUT: api/WatchList/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Movie movie)
+        public IActionResult Put([FromRoute] int id, [FromBody] WatchListDetails WatchListDetails)
         {
-            if ((await obj.GetMovieslList()).All(a => a.id != id))
+            if (id != WatchListDetails.Id)
             {
-                return NotFound(id);
+                return BadRequest();
             }
-            if (!ModelState.IsValid)
+
+            try
             {
-                return BadRequest(ModelState);
+                var result = this.service.update(WatchListDetails);
+
+                if (result == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+
             }
-            movie.id = id;
-            await obj.UpdateMovies(id,movie);
-            return Ok();
-              
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        /// <summary>
+        /// Update the WatchListDetails
+        /// </summary>
+        /// <param name="WatchListDetails">WatchListDetails</param>
+        /// <returns>statuscode</returns>
+        // POST: api/WatchList
+        [HttpPost]
+        public IActionResult Post([FromBody] WatchListDetails WatchListDetails)
         {
-            if ((await obj.GetMovieslList()).All(a => a.id != id))
+            try
             {
-                return NotFound(id);
+                var result = this.service.Save(WatchListDetails);
+                if (result == 409)
+                {
+                    return StatusCode(409);
+                }
+
+                return StatusCode(201);
             }
-            await obj.DeleteMovies(id);
-            return Ok();
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        // DELETE: api/WatchList/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var result = this.service.Delete(id);
+
+            if (result)
+            {
+                return Ok(result);
+            }
+
+            return NotFound(500);
         }
     }
 }

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieAPIUnitTest", "MovieAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieAPI", "WebAPI\MovieAPI.csproj", "{A003187F-C6E3-4E6B-902A-49825F9927BC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWTAuthServer", "JWTAuthServer\JWTAuthServer.csproj", "{707C44C6-C4F5-4A68-86B9-8D5AF8B12260}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A003187F-C6E3-4E6B-902A-49825F9927BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A003187F-C6E3-4E6B-902A-49825F9927BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A003187F-C6E3-4E6B-902A-49825F9927BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{707C44C6-C4F5-4A68-86B9-8D5AF8B12260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707C44C6-C4F5-4A68-86B9-8D5AF8B12260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707C44C6-C4F5-4A68-86B9-8D5AF8B12260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707C44C6-C4F5-4A68-86B9-8D5AF8B12260}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
