@@ -47,11 +47,7 @@
             return this.service.GetAll();
         }
 
-        /// <summary>
-        /// Get Watchlist by id
-        /// </summary>
-        /// <param name="id">whish list id</param>
-        /// <returns>WatchListDetails</returns>
+      
         // GET: api/WatchList/5
         [HttpGet("{id}")]
         public IActionResult Get([FromRoute] int id)
@@ -66,12 +62,8 @@
             return Ok(WatchListDetails);
         }
 
-        /// <summary>
-        /// add Watchlist
-        /// </summary>
-        /// <param name="id">Watchlist id</param>
-        /// <param name="WatchListDetails">WatchListDetails</param>
-        /// <returns>WatchListDetails</returns>
+       
+        // add Watchlist       
         // PUT: api/WatchList/5
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute] int id, [FromBody] WatchListDetails WatchListDetails)
@@ -99,11 +91,7 @@
             }
         }
 
-        /// <summary>
-        /// Update the WatchListDetails
-        /// </summary>
-        /// <param name="WatchListDetails">WatchListDetails</param>
-        /// <returns>statuscode</returns>
+        //Update WatchList
         // POST: api/WatchList
         [HttpPost]
         public IActionResult Post([FromBody] WatchListDetails WatchListDetails)

@@ -18,7 +18,7 @@
         }
 
         [Fact]
-        public void GetAll_ShouldReturnListOfWatchListAsExpected()
+        public void GetAllMoviesListAsExpected()
         {
             // Act
             var actual = this.WatchListRepository.GetAll().Count();
@@ -29,7 +29,7 @@
         }
 
         [Fact]
-        public void Get_ShouldReturnWhishListAsExpected()
+        public void GetByMovieIdAsExpected()
         {
             // Act
             var actual = this.WatchListRepository.Get(11);
@@ -40,7 +40,7 @@
         }
 
         [Fact]
-        public void Get_ShouldReturnNullforInvalidId()
+        public void GetRMovieforInvalidId()
         {
             // Act
             var actual = this.WatchListRepository.Get(5);
@@ -50,7 +50,7 @@
         }
 
         [Fact]
-        public void Save_WatchListAsExpected()
+        public void InsertWatchListAsExpected()
         {
             // Arrange 
             var expected = 4;
@@ -70,7 +70,7 @@
         }
 
         [Fact]
-        public void Update_ShouldUpdateForValidId()
+        public void UpdateWatchListForValidId()
         {
             // Arrange
             var WatchList = new WatchListDetails()
@@ -88,7 +88,7 @@
 
 
         [Fact]
-        public void Update_ShouldNotUpdateForInValidId()
+        public void UpdateWatchListForInValidId()
         {
             // Arrange
 
@@ -106,7 +106,7 @@
         }
 
         [Fact]
-        public void Delete_ShouldRemoveforVaildId()
+        public void DeleteWatchListforVaildId()
         {
             // Act
             var actual = this.WatchListRepository.Delete(10);
@@ -116,7 +116,7 @@
         }
 
         [Fact]
-        public void Delete_ShouldNotRemoveforInVaildId()
+        public void DeleteWatchListforInVaildId()
         {
             // Act
             var actual = this.WatchListRepository.Delete(10000);

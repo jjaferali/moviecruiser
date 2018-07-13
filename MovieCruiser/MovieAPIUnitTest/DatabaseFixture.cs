@@ -16,9 +16,9 @@
             dbContext = new MovieDbContext(options);
 
             // Mock data
-            dbContext.MovieList.Add(new MovieList { Id = 10, Comments = "first" });
-            dbContext.MovieList.Add(new MovieList { Id = 11, Comments = "second" });
-            dbContext.MovieList.Add(new MovieList { Id = 12, Comments = "third" });
+            dbContext.MovieList.Add(new MovieList { Id = 10, Comments = "Good" });
+            dbContext.MovieList.Add(new MovieList { Id = 11, Comments = "Better" });
+            dbContext.MovieList.Add(new MovieList { Id = 12, Comments = "Beset" });
         }
 
         public void Dispose()
