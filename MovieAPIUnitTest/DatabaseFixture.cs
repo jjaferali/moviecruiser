@@ -16,9 +16,10 @@
             dbContext = new MovieDbContext(options);
 
             // Mock data
-            dbContext.MovieList.Add(new MovieList { Id = 10, Comments = "Good" });
-            dbContext.MovieList.Add(new MovieList { Id = 11, Comments = "Better" });
-            dbContext.MovieList.Add(new MovieList { Id = 12, Comments = "Beset" });
+            dbContext.MovieList.Add(new MovieList { Id = 10, Title = "Kaala", Comments = "Good" });
+            dbContext.MovieList.Add(new MovieList { Id = 11, Title = "Jurasic Word", Comments = "Better" });
+            dbContext.MovieList.Add(new MovieList { Id = 12, Title="2.0", Comments = "Best" });
+            dbContext.SaveChanges();
         }
 
         public void Dispose()

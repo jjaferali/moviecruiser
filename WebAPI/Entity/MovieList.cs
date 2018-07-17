@@ -19,8 +19,8 @@
         public string overview { get; set; }
         [JsonProperty(PropertyName = "release_date")]
         public string Release_date { get; set; }
-        [JsonProperty(PropertyName = "genre_ids")]
-        public int[] genre_ids { get; set; }               
+       // [JsonProperty(PropertyName = "genre_ids")]
+       // public int[] genre_ids { get; set; }               
         [JsonProperty(PropertyName = "original_title")]
         public string Original_title { get; set; }
         [JsonProperty(PropertyName = "title")]

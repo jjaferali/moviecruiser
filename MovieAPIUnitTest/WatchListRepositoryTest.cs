@@ -40,7 +40,7 @@
         }
 
         [Fact]
-        public void GetRMovieforInvalidId()
+        public void GetMovieforInvalidId()
         {
             // Act
             var actual = this.WatchListRepository.Get(5);
@@ -53,10 +53,10 @@
         public void InsertWatchListAsExpected()
         {
             // Arrange 
-            var expected = 4;
+            var expected = 3;
             var WatchList = new WatchListDetails()
             {
-                Id = 408,
+                Id = 4,
                 Comments = "test"
                
             };
@@ -65,7 +65,7 @@
             this.WatchListRepository.Save(WatchList);
 
             // Assert
-            var actual = this.databaseFixture.dbContext.MovieList.Count();
+            var actual = this.WatchListRepository.GetAll().Count();
             Assert.Equal(expected, actual);
         }
 
