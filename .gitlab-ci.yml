@@ -15,8 +15,8 @@ test:
 build:
   stage: build
   script:
-    - 'dotnet publish moviecruiser -c Release'
+    - 'dotnet publish MovieAPI -c Release'
   artifacts:
     expire_in: 1 month
     paths:
-      - moviecruiser/bin/Release/netcoreapp2.0/publish/
+      - MovieAPI/bin/Release/netcoreapp2.0/publish/
