@@ -18,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="MovieAPI">
-      <HintPath>..\MovieAPI\bin\Debug\netcoreapp2.0\MovieAPI.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\MovieAPI\MovieAPI.csproj" />
   </ItemGroup>
 
 </Project>
