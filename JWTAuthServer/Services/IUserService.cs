@@ -1,5 +1,4 @@
 ﻿using JWTAuthServer.Data.Models;
-using System.Collections.Generic;
 
 namespace JWTAuthServer.Services
 {

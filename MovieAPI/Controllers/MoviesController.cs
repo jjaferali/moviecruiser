@@ -2,15 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using MovieAPI.Entity;
-    using MovieAPI.Model;
-    using MovieAPI.Repository;
     using MovieAPI.Service;
-    using Newtonsoft.Json;
 
     [Route("api/Movies")]
     [Authorize]
@@ -42,9 +38,9 @@
         /// <returns>list of WatchListDetails</returns>
         // GET: api/WatchList
         [HttpGet]
-        public IEnumerable<WatchListDetails> Get()
+        public IEnumerable<MovieList> Get()
         {
-            return this.service.GetAll();
+            return this.service.GetAll();           
         }
 
       
@@ -52,21 +48,28 @@
         [HttpGet("{id}")]
         public IActionResult Get([FromRoute] int id)
         {
-            var WatchListDetails = this.service.GetWhisListById(id);
-
-            if (WatchListDetails == null)
+            try
             {
-                return NotFound();
-            }
+                var WatchListDetails = this.service.GetWatchListById(id);
 
-            return Ok(WatchListDetails);
+                if (WatchListDetails == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(WatchListDetails);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
        
         // add Watchlist       
         // PUT: api/WatchList/5
         [HttpPut("{id}")]
-        public IActionResult Put([FromRoute] int id, [FromBody] WatchListDetails WatchListDetails)
+        public IActionResult Put([FromRoute] int id, [FromBody] MovieList WatchListDetails)
         {
             if (id != WatchListDetails.Id)
             {
@@ -75,7 +78,7 @@
 
             try
             {
-                var result = this.service.update(WatchListDetails);
+                var result = this.service.Update(WatchListDetails);
 
                 if (result == 0)
                 {
@@ -94,7 +97,7 @@
         //Update WatchList
         // POST: api/WatchList
         [HttpPost]
-        public IActionResult Post([FromBody] WatchListDetails WatchListDetails)
+        public IActionResult Post([FromBody] MovieList WatchListDetails)
         {
             try
             {
@@ -116,14 +119,21 @@
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            var result = this.service.Delete(id);
-
-            if (result)
+            try
             {
-                return Ok(result);
-            }
+                var result = this.service.Delete(id);
 
-            return NotFound(500);
+                if (result)
+                {
+                    return Ok(result);
+                }
+
+                return NotFound(500);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

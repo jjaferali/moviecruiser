@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MovieAPI.Model
+﻿namespace MovieAPI.Model
 {
     public static class MovieRepository
     {

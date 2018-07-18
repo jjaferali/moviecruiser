@@ -47,7 +47,7 @@
         /// Get all Watchlist details
         /// </summary>
         /// <returns>list of WatchListDetails</returns>
-        public IList<WatchListDetails> GetAll()
+        public IList<MovieList> GetAll()
         {
            return this.repository.GetAll();
         }
@@ -67,7 +67,7 @@
         /// </summary>
         /// <param name="id">id</param>
         /// <returns>WatchListDetails</returns>
-        public WatchListDetails GetWhisListById(int id)
+        public MovieList GetWatchListById(int id)
         {
             return this.repository.Get(id);
         }
@@ -77,7 +77,7 @@
         /// </summary>
         /// <param name="watchListDetails"></param>
         /// <returns>WatchListDetails</returns>
-        public int Save(WatchListDetails watchListDetails)
+        public int Save(MovieList watchListDetails)
         {
             return this.repository.Save(watchListDetails);
         }
@@ -87,9 +87,9 @@
         /// </summary>
         /// <param name="watchListDetails"></param>
         /// <returns>integer</returns>
-        public int update(WatchListDetails watchListDetails)
+        public int Update(MovieList watchListDetails)
         {
-            return this.repository.update(watchListDetails);
+            return this.repository.Update(watchListDetails);
         }
     }
 }

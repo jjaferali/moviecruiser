@@ -1,22 +1,21 @@
 ﻿namespace MovieAPI.Service
 {
     using MovieAPI.Entity;
-    using MovieAPI.Model;
     using Newtonsoft.Json;
     using System.Collections.Generic;
 
     public interface IWatchListService
     {
-        IList<WatchListDetails> GetAll();
+        IList<MovieList> GetAll();
 
         [JsonProperty(PropertyName = "results")]
         IList<MovieList> GetTMDBMovieslList { get; set; }
 
-        WatchListDetails GetWhisListById(int id);
+        MovieList GetWatchListById(int id);
 
-        int update(WatchListDetails watchListDetails);
+        int Update(MovieList watchListDetails);
 
-        int Save(WatchListDetails watchListDetails);
+        int Save(MovieList watchListDetails);
 
         bool Delete(int id);
     }

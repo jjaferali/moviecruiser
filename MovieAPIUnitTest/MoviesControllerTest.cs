@@ -2,16 +2,13 @@
 using Moq;
 using MovieAPI.Controllers;
 using MovieAPI.Entity;
-using MovieAPI.Model;
 using MovieAPI.Service;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace MovieAPIUnitTestvieAPITest
 {
-    
+
     public class MoviesControllerTest
     {
         
@@ -21,7 +18,7 @@ namespace MovieAPIUnitTestvieAPITest
            
             var mockIMovies = new Mock<IWatchListService>();
 
-            mockIMovies.Setup(service => service.GetTMDBMovieslList).Returns(GetMoviesListFromTMDB());
+            mockIMovies.Setup(service => service.GetTMDBMovieslList).Returns(GetMoviesList());
 
             var movieController = new MoviesController(mockIMovies.Object);
 
@@ -42,7 +39,7 @@ namespace MovieAPIUnitTestvieAPITest
           
             // Act
             var result = movieController.Get();
-            var actualResult = result as List<WatchListDetails>;
+            var actualResult = result as List<MovieList>;
             //Assert
             Assert.NotNull(result);
             Assert.Equal(2, actualResult.Count);
@@ -71,7 +68,7 @@ namespace MovieAPIUnitTestvieAPITest
             var mockIMovies = new Mock<IWatchListService>();
             mockIMovies.Setup(service => service.GetAll()).Returns(GetMoviesList());
             var movieController = new MoviesController(mockIMovies.Object);
-            var movieobj = new WatchListDetails { Id = 3, MovieName = "IrumbuThirai", ReleaseDate = "07/06/2018", VoteCount = 100, VoteAverage = 9.80, Overview = "Good" };
+            var movieobj = new MovieList { Id = 3, Title = "IrumbuThirai", Release_date = "07/06/2018", Vote_count = 100, Vote_average = 9.80, overview = "Good" };
 
             // Act
             var result = movieController.Post(movieobj) as StatusCodeResult;
@@ -87,9 +84,9 @@ namespace MovieAPIUnitTestvieAPITest
         {
             var expected = 1;
             var mockIMovies = new Mock<IWatchListService>();
-            mockIMovies.Setup(x => x.update(It.IsAny<WatchListDetails>())).Returns(1);           
+            mockIMovies.Setup(x => x.Update(It.IsAny<MovieList>())).Returns(1);           
             var movieController = new MoviesController(mockIMovies.Object);
-            var movieobj = new WatchListDetails { Id =2,Comments="Good Movie" };
+            var movieobj = new MovieList { Id =2,Comments="Good Movie" };
            
             // Act
             var result = movieController.Put(2, movieobj) as OkObjectResult;
@@ -108,9 +105,9 @@ namespace MovieAPIUnitTestvieAPITest
         {
             
             var mockIMovies = new Mock<IWatchListService>();
-            mockIMovies.Setup(x => x.update(It.IsAny<WatchListDetails>())).Returns(1);
+            mockIMovies.Setup(x => x.Update(It.IsAny<MovieList>())).Returns(1);
             var movieController = new MoviesController(mockIMovies.Object);
-            var  movieobj = new WatchListDetails { Id = 3, Comments = "Good Movie" };
+            var  movieobj = new MovieList { Id = 3, Comments = "Good Movie" };
 
             // Act
             var result = movieController.Put(4, movieobj) as BadRequestResult;
@@ -154,15 +151,7 @@ namespace MovieAPIUnitTestvieAPITest
 
         }
 
-        private  IList<WatchListDetails> GetMoviesList()
-        {
-          return new  List<WatchListDetails> {
-                new WatchListDetails { Id=1,MovieName="Kaala",ReleaseDate="07/06/2018",VoteCount=100,VoteAverage=9.80,Overview="Good" },
-                new WatchListDetails { Id=2,MovieName="Jurasic Word",ReleaseDate="07/06/2018",VoteCount=80,VoteAverage=5.50,Overview="Good" }
-            };
-        }
-
-        private IList<MovieList> GetMoviesListFromTMDB()
+        private  IList<MovieList> GetMoviesList()
         {
             return new List<MovieList> {
                 new MovieList { Id=1,Title="Kaala",Release_date="07/06/2018",Vote_count=100,Vote_average=9.80,overview="Good" },
@@ -170,5 +159,6 @@ namespace MovieAPIUnitTestvieAPITest
             };
         }
 
+       
     }
 }

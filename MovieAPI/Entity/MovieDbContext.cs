@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MovieAPI.Model;
-namespace MovieAPI.Entity
+﻿namespace MovieAPI.Entity
 {
     using Microsoft.EntityFrameworkCore;
 

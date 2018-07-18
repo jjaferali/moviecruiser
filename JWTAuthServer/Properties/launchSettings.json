@@ -13,7 +13,7 @@
       "launchBrowser": true,
       "launchUrl": "auth/login",
       "environmentVariables": {
-        "SQL_AUTH": "Initial Catalog=fsddb;Data Source=fsdpracserver.database.windows.net;user id=jaffer;password=password@123",
+        "SQL_AUTH": "Server=.\\SQLEXPRESS;Database=Movies;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
@@ -22,7 +22,7 @@
       "launchBrowser": true,
       "launchUrl": "auth/login",
       "environmentVariables": {
-        "SQL_AUTH": "Initial Catalog=fsddb;Data Source=fsdpracserver.database.windows.net;user id=jaffer;password=password@123",
+        "SQL_AUTH": "Server=.\\SQLEXPRESS;Database=Movies;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:50488/"

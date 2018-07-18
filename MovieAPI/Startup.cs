@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microex.Swagger.Application;
 using Microex.Swagger.SwaggerGen.Application;
 using Microex.Swagger.SwaggerGen.Model;
@@ -11,8 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using MovieAPI.Entity;
 using MovieAPI.Model;
 using MovieAPI.Repository;
@@ -45,6 +40,8 @@ namespace MovieCruiser
             MovieRepository.ApiKey = Environment.GetEnvironmentVariable("ApiKey");
             MovieRepository.NowPlaying = Environment.GetEnvironmentVariable("NowPlaying");
             //Dependency injection
+            if (string.IsNullOrEmpty(connectionString))
+                connectionString =  ((ConfigurationSection)(Configuration.GetSection("ConnectionString").GetSection("DefaultConnection"))).Value;
             services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IMovieDbContext>(provider => provider.GetService<MovieDbContext>());
             services.AddScoped<IWatchListRepository, WatchListRepository>();

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using JWTAuthServer.Data.Models;
 using JWTAuthServer.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWTAuthServer.Controllers
@@ -20,7 +16,7 @@ namespace JWTAuthServer.Controllers
             _service = service;
             _tokenGenerator = tokenGenerator;
         }
-        
+        //For Registering the user 
         [HttpPost]
         [Route("register")]
         public IActionResult Register([FromBody]User user)
@@ -29,7 +25,7 @@ namespace JWTAuthServer.Controllers
             {
                 if (_service.IsUserExists(user.UserId))
                 {
-                    return StatusCode(209, "User already exists.");
+                    return StatusCode(409, "User already exists.");
                 }
                 else
                 {
@@ -42,7 +38,7 @@ namespace JWTAuthServer.Controllers
                 return StatusCode(500, "Error");
             }
         }
-
+        //For Login the user
         [HttpPost]
         [Route("login")]
         public IActionResult Login([FromBody]User user)

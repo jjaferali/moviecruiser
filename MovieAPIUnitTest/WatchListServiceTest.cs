@@ -1,11 +1,9 @@
 ﻿using Moq;
-using MovieAPI.Model;
+using MovieAPI.Entity;
 using MovieAPI.Repository;
 using MovieAPI.Service;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace MovieAPIUnitTestvieAPITest
@@ -43,7 +41,7 @@ namespace MovieAPIUnitTestvieAPITest
             var service = new WatchListService(mockWatchListRepository.Object);
 
             // Act
-            var actual = service.GetWhisListById(1);
+            var actual = service.GetWatchListById(1);
 
             //Assert
             Assert.NotNull(actual);
@@ -56,12 +54,12 @@ namespace MovieAPIUnitTestvieAPITest
         {
             // Arrange 
             var expected = 1;
-            var WatchList = new WatchListDetails()
+            var WatchList = new MovieList()
             {
                 Id = 1,             
                 Comments = "Good"
             };
-            mockWatchListRepository.Setup(x => x.Save(It.IsAny<WatchListDetails>())).Returns(expected);
+            mockWatchListRepository.Setup(x => x.Save(It.IsAny<MovieList>())).Returns(expected);
             var service = new WatchListService(mockWatchListRepository.Object);
 
             // Act
@@ -76,17 +74,17 @@ namespace MovieAPIUnitTestvieAPITest
         {
             // Arrange
             var expected = 1;
-            var WatchList = new WatchListDetails()
+            var WatchList = new MovieList()
             {
                 Id = 1,                
                 Comments = "Good"
             };
 
-            this.mockWatchListRepository.Setup(x => x.update(It.IsAny<WatchListDetails>())).Returns(1);
+            this.mockWatchListRepository.Setup(x => x.Update(It.IsAny<MovieList>())).Returns(1);
             var service = new WatchListService(mockWatchListRepository.Object);
 
             // Act
-            var actual = service.update(WatchList);
+            var actual = service.Update(WatchList);
 
             //Assert
             Assert.Equal(expected, actual);
@@ -106,11 +104,11 @@ namespace MovieAPIUnitTestvieAPITest
             Assert.True(actual);
         }
 
-        private List<WatchListDetails> GetMoviesList()
+        private List<MovieList> GetMoviesList()
         {
-            return new List<WatchListDetails> {
-                new WatchListDetails { Id=1,MovieName="Kaala",ReleaseDate="07/06/2018",VoteCount=100,VoteAverage=9.80,Overview="Good" },
-                new WatchListDetails { Id=2,MovieName="Jurasic Word",ReleaseDate="07/06/2018",VoteCount=80,VoteAverage=5.50,Overview="Good" }
+            return new List<MovieList> {
+                new MovieList { Id=1,Title="Kaala",Release_date="07/06/2018",Vote_count=100,Vote_average=9.80,overview="Good" },
+                new MovieList { Id=2,Title="Jurasic Word",Release_date="07/06/2018",Vote_count=80,Vote_average=5.50,overview="Good" }
             };
         }
     }

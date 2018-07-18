@@ -1,22 +1,21 @@
 ﻿namespace MovieAPI.Repository
 {
     using MovieAPI.Entity;
-    using MovieAPI.Model;
     using Newtonsoft.Json;
     using System.Collections.Generic;
 
     public interface IWatchListRepository
     {
-        IList<WatchListDetails> GetAll();
+        IList<MovieList> GetAll();
 
         [JsonProperty(PropertyName = "results")]
         IList<MovieList> GetTMDBMovieslList { get; set; }
 
-        WatchListDetails Get(int id);
+        MovieList Get(int id);
 
-        int update(WatchListDetails watchListDetails);
+        int Update(MovieList watchListDetails);
 
-        int Save(WatchListDetails watchListDetails);
+        int Save(MovieList watchListDetails);
 
         bool Delete(int id);
 

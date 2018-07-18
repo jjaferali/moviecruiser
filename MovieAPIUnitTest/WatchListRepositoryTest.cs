@@ -1,8 +1,7 @@
 ﻿namespace MovieAPIUnitTestvieAPITest
 {
-    using MovieAPI.Model;
+    using MovieAPI.Entity;
     using MovieAPI.Repository;
-    using System;
     using System.Linq;
     using Xunit;
 
@@ -54,7 +53,7 @@
         {
             // Arrange 
             var expected = 3;
-            var WatchList = new WatchListDetails()
+            var WatchList = new MovieList()
             {
                 Id = 4,
                 Comments = "test"
@@ -73,14 +72,14 @@
         public void UpdateWatchListForValidId()
         {
             // Arrange
-            var WatchList = new WatchListDetails()
+            var WatchList = new MovieList()
             {
                 Id=10,               
                 Comments = "updated"
             };
 
             // Act
-            var actual = this.WatchListRepository.update(WatchList);
+            var actual = this.WatchListRepository.Update(WatchList);
 
             // Assert
             Assert.Equal(1, actual);
@@ -92,14 +91,14 @@
         {
             // Arrange
 
-            var WatchList = new WatchListDetails()
+            var WatchList = new MovieList()
             {
                 Id = 15,               
                 Comments = "updated"
             };
 
             // Act
-            var actual = this.WatchListRepository.update(WatchList);
+            var actual = this.WatchListRepository.Update(WatchList);
 
             // Assert
             Assert.Equal(0, actual);

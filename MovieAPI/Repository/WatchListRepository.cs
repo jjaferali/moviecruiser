@@ -1,10 +1,8 @@
 ﻿namespace MovieAPI.Repository
 {
     using MovieAPI.Entity;
-    using MovieAPI.Model;
     using System.Linq;
     using System.Collections.Generic;
-    using System;
     using Newtonsoft.Json;
 
     public class WatchListRepository : IWatchListRepository
@@ -24,19 +22,9 @@
         /// Get all Watchlist 
         /// </summary>
         /// <returns></returns>
-        public IList<WatchListDetails> GetAll()
+        public IList<MovieList> GetAll()
         {
-            return this._context.MovieList.Select(x => new WatchListDetails
-            {
-                Id = x.Id,                
-                MovieName = x.Title,
-                PosterPath = x.Poster_path,
-                ReleaseDate = x.Release_date,
-                VoteAverage = x.Vote_average,
-                VoteCount = x.Vote_count,
-                Overview = x.overview,
-                Comments = x.Comments
-            }).ToList();
+            return this._context.MovieList.ToList();
         }
 
         /// <summary>
@@ -44,7 +32,7 @@
         /// </summary>
         /// <param name="id">id</param>
         /// <returns>WatchListDetails</returns>
-        public WatchListDetails Get(int id)
+        public MovieList Get(int id)
         {
             var response = this._context.MovieList.FirstOrDefault(x => x.Id == id);
 
@@ -53,18 +41,8 @@
                 return null;
             }
 
-            return new WatchListDetails
-            {
+            return response;
 
-                Comments = response.Comments,
-                Id = response.Id,
-                MovieName = response.Title,
-                VoteAverage = response.Vote_average,
-                PosterPath = response.Poster_path,
-                VoteCount = response.Vote_count,
-                Overview = response.overview,
-                ReleaseDate = response.Release_date,
-            };
         }
 
         /// <summary>
@@ -72,37 +50,24 @@
         /// </summary>
         /// <param name="watchListDetails">WatchListDetails</param>
         /// <returns>integer</returns>
-        public int Save(WatchListDetails WatchListDetails)
+        public int Save(MovieList WatchListDetails)
         {
             bool existMovie = this._context.MovieList.Any(x => x.Id == WatchListDetails.Id);
 
             if (existMovie)
             {
                 return 409;
-            }
-
-            var watchList = new MovieList()
-            {
-                Comments = WatchListDetails.Comments,
-                Id = WatchListDetails.Id,
-                Title = WatchListDetails.MovieName,
-                Vote_average = WatchListDetails.VoteAverage,
-                Poster_path = WatchListDetails.PosterPath,
-                Vote_count = WatchListDetails.VoteCount,
-                overview = WatchListDetails.Overview,
-                Release_date = WatchListDetails.ReleaseDate,               
-            };
-
-            this._context.MovieList.Add(watchList);
+            }           
+            this._context.MovieList.Add(WatchListDetails);
             return this._context.SaveChanges();
         }
 
         /// <summary>
-        /// update the Watchlist
+        /// Update the Watchlist
         /// </summary>
         /// <param name="watchListDetails"></param>
         /// <returns></returns>
-        public int update(WatchListDetails WatchListDetails)
+        public int Update(MovieList WatchListDetails)
         {
             var watchList = this._context.MovieList.FirstOrDefault(x => x.Id == WatchListDetails.Id);
             if (watchList != null)

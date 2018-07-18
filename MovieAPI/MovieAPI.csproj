@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180718055641_MovieAPI.Entity.MovieDbContext.cs" />
+    <Compile Remove="Migrations\20180718055641_MovieAPI.Entity.MovieDbContext.Designer.cs" />
+    <Compile Remove="Model\WatchListDetails.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
