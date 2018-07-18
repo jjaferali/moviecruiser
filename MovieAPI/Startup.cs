@@ -39,6 +39,15 @@ namespace MovieCruiser
             MovieRepository.BaseUrl = Environment.GetEnvironmentVariable("BaseUrl");
             MovieRepository.ApiKey = Environment.GetEnvironmentVariable("ApiKey");
             MovieRepository.NowPlaying = Environment.GetEnvironmentVariable("NowPlaying");
+
+            if (string.IsNullOrEmpty(MovieRepository.BaseUrl))
+                MovieRepository.BaseUrl = ((ConfigurationSection)(Configuration.GetSection("TMDB").GetSection("BaseUrl"))).Value;
+            if (string.IsNullOrEmpty(MovieRepository.ApiKey))
+                MovieRepository.ApiKey = ((ConfigurationSection)(Configuration.GetSection("TMDB").GetSection("ApiKey"))).Value;
+            if (string.IsNullOrEmpty(MovieRepository.NowPlaying))
+                MovieRepository.NowPlaying = ((ConfigurationSection)(Configuration.GetSection("TMDB").GetSection("NowPlaying"))).Value;
+
+
             //Dependency injection
             if (string.IsNullOrEmpty(connectionString))
                 connectionString =  ((ConfigurationSection)(Configuration.GetSection("ConnectionString").GetSection("DefaultConnection"))).Value;
