@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180719052252_JWTAuthServer.Data.Models.User.cs" />
+    <Compile Remove="Migrations\20180719052252_JWTAuthServer.Data.Models.User.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

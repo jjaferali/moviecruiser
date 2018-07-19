@@ -31,6 +31,9 @@ namespace JWTAuthServer
             }));
             var connString = Environment.GetEnvironmentVariable("SQL_AUTH");
 
+            if(string.IsNullOrEmpty(connString))
+                connString = ((ConfigurationSection)(Configuration.GetSection("ConnectionString").GetSection("DefaultConnection"))).Value;
+
             // Dependency injection
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connString));                      
             services.AddScoped<IUserContext, UserContext>();

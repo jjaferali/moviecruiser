@@ -11,19 +11,19 @@ namespace JWTAuthServer.Data.Persistence
         {
             _context = context;
         }
-
+        //Save the user information
         public User Register(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
             return user;
         }
-
+        //Get the login information
         public User Login(string userId, string password)
         {
             return _context.Users.FirstOrDefault(x => x.UserId == userId && x.Password == password);
         }
-
+        //Find the user id from User table
         public User FindUserById(string userId)
         {
             return _context.Users.FirstOrDefault(x => x.UserId == userId);

@@ -35,7 +35,7 @@ namespace MovieCruiser
 
            
             // Connection string
-            string connectionString = Environment.GetEnvironmentVariable("SQL_AUTH");
+            string connectionString = Environment.GetEnvironmentVariable("SQL_MOVIE");
             MovieRepository.BaseUrl = Environment.GetEnvironmentVariable("BaseUrl");
             MovieRepository.ApiKey = Environment.GetEnvironmentVariable("ApiKey");
             MovieRepository.NowPlaying = Environment.GetEnvironmentVariable("NowPlaying");

@@ -23,6 +23,7 @@ namespace JWTAuthServer.Controllers
         {
             try
             {
+                //Checking the user exist or not
                 if (_service.IsUserExists(user.UserId))
                 {
                     return StatusCode(409, "User already exists.");

@@ -7,7 +7,7 @@ services:
         links:
             - db
         environment:
-            SQLSERVER: "Data source=db;initial catalog=User;User id=sa;Password=P@ssw0rd"
+            SQL_AUTH: "Data source=db;initial catalog=User;User id=sa;Password=P@ssw0rd"
     backend:
         image: "moviecruiser"
         ports:
@@ -16,7 +16,7 @@ services:
             - db
             - authorization
         environment:
-            SQLSERVER: "Data source=db;initial catalog=Movie;User id=sa;Password=P@ssw0rd"
+            SQL_MOVIE: "Data source=db;initial catalog=Movie;User id=sa;Password=P@ssw0rd"
     db:
         image: "microsoft/mssql-server-windows-express"
         ports:
