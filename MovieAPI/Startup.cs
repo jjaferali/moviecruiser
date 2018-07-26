@@ -28,10 +28,15 @@ namespace MovieCruiser
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {          
-          
+        {
+
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
+
             // JWT
-            ConfigureJwtAuthService(Configuration, services);
+          //  ConfigureJwtAuthService(Configuration, services);
 
            
             // Connection string
@@ -65,15 +70,18 @@ namespace MovieCruiser
             services.AddMvc();
         }
 
-       
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            app.UseCors("CorsPolicy");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-               
+
             }
 
             app.UseSwagger();
@@ -82,13 +90,14 @@ namespace MovieCruiser
                 c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "moviecruiser api v1.0");
             });
 
-          
-            app.UseAuthentication();
+
+             app.UseAuthentication();
 
 
-            app.UseMvc(routes=> {
+            app.UseMvc(routes =>
+            {
                 routes.MapRoute(name: "default", template: "{ controller=Movies}/{action=GetMovies}/{id?}");
             });
-                   }
+        }
     }
 }

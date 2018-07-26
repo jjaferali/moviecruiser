@@ -8,7 +8,8 @@
         [JsonProperty(PropertyName = "id")]
         [JsonRequired]
         public int Id { get; set; }
-        public string Comments { get; set; }
+        [JsonProperty(PropertyName = "comments")]
+        public string Comments { get; set; }       
         public bool WatchList { get; set; }
         [JsonProperty(PropertyName = "poster_path")]
         public string Poster_path { get; set; }
