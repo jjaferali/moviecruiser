@@ -36,7 +36,7 @@ namespace MovieCruiser
             }));
 
             // JWT
-          //  ConfigureJwtAuthService(Configuration, services);
+           ConfigureJwtAuthService(Configuration, services);
 
            
             // Connection string
